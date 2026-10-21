@@ -78,6 +78,30 @@
   $$('.lots-side .chip').forEach(function(c){c.addEventListener('click',function(){toggleLot(c.dataset.lot)})});
   renderLots();
 
+  // Vidéo : chargée et lue seulement quand elle est visible
+  (function(){
+    var v=$('#vid'); if(!v) return;
+    var fr=v.parentNode, play=$('#vidPlay'), snd=$('#vidSound'), full=$('#vidFull');
+    function load(){ if(!v.getAttribute('src')){ v.src=v.dataset.src; } }
+    function sync(){ var on=!v.paused; fr.classList.toggle('playing',on); play.setAttribute('aria-label',on?play.dataset.pause:play.dataset.play); }
+    function start(){ load(); var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); }
+    v.addEventListener('play',sync); v.addEventListener('pause',sync);
+    play.addEventListener('click',function(){ v.paused?start():v.pause(); });
+    v.addEventListener('click',function(){ v.paused?start():v.pause(); });
+    function setSound(on){ v.muted=!on; snd.setAttribute('aria-pressed',on); snd.setAttribute('aria-label',on?snd.dataset.off:snd.dataset.on); }
+    snd.addEventListener('click',function(){ setSound(v.muted); if(v.paused) start(); });
+    full.addEventListener('click',function(){
+      start(); setSound(true);
+      if(v.requestFullscreen) v.requestFullscreen().catch(function(){});
+      else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    if('IntersectionObserver' in window && !reduce){
+      new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting) start(); else if(!document.fullscreenElement) v.pause();
+      })},{threshold:.4}).observe(fr);
+    }
+  })();
+
   // Galerie
   var lb=$('#lb'),gal=$$('#gal button'),gi=0;
   function show(i){
