@@ -1,7 +1,7 @@
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fmt=function(n){return n.toLocaleString('fr-FR').replace(/ | /g,' ')};
+  var fmt=function(n){return n.toLocaleString('fr-FR').replace(/\s/g,'\u00a0')};
 
   // Menu mobile
   var nav=$('#nav'), mb=$('#menuBtn');
@@ -178,12 +178,12 @@
     function countUp(){
       $$('.fig .v').forEach(function(v,i){
         var node=v.firstChild; if(!node||node.nodeType!==3) return;
-        var txt=node.nodeValue.trim(), dec=(txt.split(',')[1]||'').length, to=parseFloat(txt.replace(/\s/g,'').replace(',','.'));
+        var txt=node.nodeValue.trim(), mm=txt.match(/[.,](\d+)$/), dec=mm?mm[1].length:0, sep=mm?txt.charAt(txt.length-dec-1):',', to=parseFloat(txt.replace(/\s/g,'').replace(',','.'));
         if(isNaN(to)) return;
         var t0=null, dur=1400+i*120;
         (function step(t){
           if(!t0)t0=t; var k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,4), n=to*e;
-          node.nodeValue=dec?n.toFixed(dec).replace('.',','):fmt(Math.round(n));
+          node.nodeValue=dec?n.toFixed(dec).replace('.',sep):fmt(Math.round(n));
           if(k<1) requestAnimationFrame(step); else node.nodeValue=txt;
         })(performance.now());
       });
