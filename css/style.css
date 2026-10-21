@@ -282,6 +282,16 @@ footer ul a{text-decoration:none}
 .wa:hover{transform:translateY(-2px)}
 
 
+
+/* Réseaux sociaux */
+.social{display:flex;flex-wrap:wrap;gap:10px}
+.social a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:500 14px var(--f-body);padding:9px 14px 9px 11px;border:1px solid color-mix(in srgb,currentColor 30%,transparent);border-radius:var(--r);transition:background .2s,border-color .2s,color .2s}
+.social a:hover{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.social svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+.social svg path{fill:currentColor;stroke:none}
+.social svg .dot{fill:currentColor;stroke:none}
+.social.foot{margin-top:14px}
+.social.foot a{font-size:13px;padding:7px 11px 7px 9px}
 /* Langues */
 @media (max-width:480px){.hdr .wrap{gap:10px}.brand{gap:8px}.brand svg{width:42px}.brand-name{font-size:15px;letter-spacing:.08em}.lang a{padding:6px 5px}}
 .lang{display:flex;gap:2px;font:500 12px var(--f-mono)}
