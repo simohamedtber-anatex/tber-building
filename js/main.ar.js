@@ -126,7 +126,7 @@
     return m;
   }
   function build(){
-    $('#waSend').href='https://wa.me/212665754926?text='+encodeURIComponent(message());
+    $('#waSend').href='https://wa.me/212665754925?text='+encodeURIComponent(message());
     $('#mailSend').href='mailto:tberbuildings@gmail.com?subject='+encodeURIComponent('طلب كراء – TBER BUILDING')+'&body='+encodeURIComponent(message());
   }
   $$('#form input,#form select,#form textarea').forEach(function(el){el.addEventListener('input',build)});
