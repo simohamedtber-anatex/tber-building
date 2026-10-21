@@ -1,5 +1,6 @@
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fmt=function(n){return n.toLocaleString('fr-FR').replace(/ | /g,' ')};
 
   // Menu mobile
@@ -53,7 +54,7 @@
       $('#tHead').innerHTML='';$('#tBody').innerHTML='';$('#tFoot').innerHTML='';return;
     }
     var tot=ids.reduce(function(a,id){return a+sum(id)},0);
-    $('#totV').textContent=fmt(tot)+' m²';
+    tweenTotal(tot);
     $('#totK').textContent=ids.length===4?'surface utile des 4 lots':ids.length===1?'surface utile du lot '+ids[0]:'surface utile des lots '+ids.join(' + ');
     $('#tHead').innerHTML='<tr><th>Niveau</th>'+ids.map(function(i){return '<th>Lot '+i+'</th>'}).join('')+(ids.length>1?'<th>Total</th>':'')+'</tr>';
     $('#tBody').innerHTML=ROWS.map(function(r){
@@ -61,6 +62,13 @@
       return '<tr><td>'+r[1]+'</td>'+cells+(ids.length>1?'<td>'+fmt(t)+'</td>':'')+'</tr>';
     }).join('');
     $('#tFoot').innerHTML='<tr><td>Total m²</td>'+ids.map(function(i){return '<td>'+fmt(sum(i))+'</td>'}).join('')+(ids.length>1?'<td>'+fmt(tot)+'</td>':'')+'</tr>';
+  }
+  var shownTot=12046;
+  function tweenTotal(to){
+    var el=$('#totV'),from=shownTot,t0=null;shownTot=to;
+    el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+    if(reduce){el.textContent=fmt(to)+' m²';return}
+    (function step(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/600),e=1-Math.pow(1-k,3);el.textContent=fmt(Math.round(from+(to-from)*e))+' m²';if(k<1)requestAnimationFrame(step)})(performance.now());
   }
   function toggleLot(id){sel[id]=!sel[id];renderLots()}
   $$('.lot').forEach(function(g){
@@ -71,11 +79,20 @@
   renderLots();
 
   // Galerie
-  var lb=$('#lb');
-  $$('#gal button').forEach(function(b){b.addEventListener('click',function(){
-    $('#lbImg').src=b.dataset.src;$('#lbImg').alt=b.dataset.cap;$('#lbCap').textContent=b.dataset.cap;
-    if(lb.showModal) lb.showModal(); else lb.setAttribute('open','');
+  var lb=$('#lb'),gal=$$('#gal button'),gi=0;
+  function show(i){
+    gi=(i+gal.length)%gal.length;var b=gal[gi],im=$('#lbImg');
+    im.style.opacity=0;
+    setTimeout(function(){im.src=b.dataset.src;im.alt=b.dataset.cap;$('#lbCap').textContent=b.dataset.cap+'  ·  '+(gi+1)+' / '+gal.length;im.style.opacity=1},reduce?0:150);
+  }
+  gal.forEach(function(b,i){b.addEventListener('click',function(){
+    show(i);if(lb.showModal) lb.showModal(); else lb.setAttribute('open','');
   })});
+  $('#lbPrev').addEventListener('click',function(){show(gi-1)});
+  $('#lbNext').addEventListener('click',function(){show(gi+1)});
+  lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(gi-1);if(e.key==='ArrowRight')show(gi+1)});
+  var sx=null;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(gi+(dx<0?1:-1));sx=null});
   $('#lbClose').addEventListener('click',function(){lb.close()});
   lb.addEventListener('click',function(e){if(e.target===lb) lb.close()});
 
@@ -119,4 +136,60 @@
     window.open($('#waSend').href,'_blank','noopener');
   });
 
+
+  // ===== Animations =====
+  (function(){
+    var root=document.documentElement, hdr=$('.hdr'), bar=$('#progress');
+    function onScroll(){
+      var y=window.scrollY||0, h=document.documentElement.scrollHeight-window.innerHeight;
+      bar.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+      hdr.classList.toggle('scrolled',y>10);
+      if(h-y<80) $$('.rv:not(.in)').forEach(function(el){el.classList.add('in')}); // bas de page : tout afficher
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+    // lien actif dans le menu
+    var links={};$$('#nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+    if('IntersectionObserver' in window){
+      var spy=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting&&links[e.target.id]){$$('#nav a').forEach(function(a){a.classList.remove('active')});links[e.target.id].classList.add('active')}
+      })},{rootMargin:'-45% 0px -50% 0px'});
+      Object.keys(links).forEach(function(id){var s=document.getElementById(id);if(s)spy.observe(s)});
+    }
+
+    if(reduce||!('IntersectionObserver' in window)) return;
+    root.classList.add('anim');
+
+    // éléments révélés au défilement
+    var groups=[['.sec-head',0],['.figures .fig',.08],['.sheet',0],['.plate',.15],['.use',.08],['.gal button',.07],['.about > *',.12],['.pillars div',.1]];
+    groups.forEach(function(g){$$(g[0]).forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',(i*g[1]).toFixed(2)+'s')})});
+    // tracés SVG : longueur normalisée
+    $$('#hauteurs .d-redl path, .use svg path, .use svg circle').forEach(function(p){p.setAttribute('pathLength','1')});
+
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      if(e.target.classList.contains('figures')) countUp();
+      io.unobserve(e.target);
+    })},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+    $$('.rv, #hauteurs, #lots, .loc, .figures').forEach(function(el){io.observe(el)});
+
+    // chiffres clés qui défilent
+    function countUp(){
+      $$('.fig .v').forEach(function(v,i){
+        var node=v.firstChild; if(!node||node.nodeType!==3) return;
+        var txt=node.nodeValue.trim(), dec=(txt.split(',')[1]||'').length, to=parseFloat(txt.replace(/\s/g,'').replace(',','.'));
+        if(isNaN(to)) return;
+        var t0=null, dur=1400+i*120;
+        (function step(t){
+          if(!t0)t0=t; var k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,4), n=to*e;
+          node.nodeValue=dec?n.toFixed(dec).replace('.',','):fmt(Math.round(n));
+          if(k<1) requestAnimationFrame(step); else node.nodeValue=txt;
+        })(performance.now());
+      });
+    }
+
+    // bulle WhatsApp affichée quelques secondes
+    var wa=$('.wa'); if(wa){setTimeout(function(){wa.classList.add('tip');setTimeout(function(){wa.classList.remove('tip')},4500)},5000)}
+  })();
 })();
