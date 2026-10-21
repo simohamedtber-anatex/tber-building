@@ -13,12 +13,12 @@
 
   // Coupe : niveaux
   var LV={
-    r3:{t:'3rd floor',h:'4.00 m',c:'750 kg/m²',s:'633 – 881 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms and toilets, served by the passenger lift, the 2.5 t freight lift and the fire escape. Terraces on lots 21 and 22.'},
-    r2:{t:'2nd floor',h:'4.00 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms, showers and toilets, served by the passenger lift, the 2.5 t freight lift, the staircase and the fire escape.'},
-    r1:{t:'1st floor',h:'4.00 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms, showers and toilets, served by the passenger lift, the 2.5 t freight lift, the staircase and the fire escape.'},
+    r3:{t:'3rd floor',h:'3.60 m',c:'750 kg/m²',s:'633 – 881 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms and toilets, served by the passenger lift, the 2.5 t freight lift and the fire escape. Terraces on lots 21 and 22.'},
+    r2:{t:'2nd floor',h:'3.60 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms, showers and toilets, served by the passenger lift, the 2.5 t freight lift, the staircase and the fire escape.'},
+    r1:{t:'1st floor',h:'3.60 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Workshop, pallet storage, showroom',p:'Open floor with changing rooms, showers and toilets, served by the passenger lift, the 2.5 t freight lift, the staircase and the fire escape.'},
     mez:{t:'Mezzanine',h:'within the ground floor',c:'',s:'115 – 293 m²',u:'Additional floor area',p:'Extra floor area, reached by stairs from the ground floor, without reducing the height above the docks.'},
-    rdc:{t:'Ground floor',h:'7.00 m',c:'3 t/m²',s:'524 – 578 m²',u:'Showroom, production, logistics',p:'Two loading docks with dock lift per lot, dock at +1.20 m, HGV access and a reinforced slab for handling equipment.'},
-    ss:{t:'Basement',h:'3.60 m',c:'',s:'',u:'',p:'Easy access from the road, served by the passenger lift, the freight lift and the staircase.'}
+    rdc:{t:'Ground floor',h:'7.00 m',c:'3.5 t/m²',s:'524 – 578 m²',u:'Showroom, production, logistics',p:'One loading dock with dock lift per lot, at +1.20 m, HGV access and a reinforced slab for handling equipment.'},
+    ss:{t:'Basement',h:'2.50 m',c:'',s:'',u:'',p:'Easy access from the road, served by the passenger lift, the freight lift and the staircase.'}
   };
   function setLevel(k){
     var d=LV[k]; if(!d) return;

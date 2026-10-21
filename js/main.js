@@ -13,12 +13,12 @@
 
   // Coupe : niveaux
   var LV={
-    r3:{t:'3ᵉ étage',h:'4,00 m',c:'750 kg/m²',s:'633 – 881 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t et l\'escalier de secours. Terrasses sur les lots 21 et 22.'},
-    r2:{t:'2ᵉ étage',h:'4,00 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires, douches et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t, l\'escalier et l\'escalier de secours.'},
-    r1:{t:'1ᵉʳ étage',h:'4,00 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires, douches et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t, l\'escalier et l\'escalier de secours.'},
+    r3:{t:'3ᵉ étage',h:'3,60 m',c:'750 kg/m²',s:'633 – 881 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t et l\'escalier de secours. Terrasses sur les lots 21 et 22.'},
+    r2:{t:'2ᵉ étage',h:'3,60 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires, douches et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t, l\'escalier et l\'escalier de secours.'},
+    r1:{t:'1ᵉʳ étage',h:'3,60 m',c:'750 kg/m²',s:'711 – 778 m²',u:'Atelier, stockage palettier, showroom',p:'Plateau libre avec vestiaires, douches et sanitaires, desservi par l\'ascenseur, le monte-charge 2,5 t, l\'escalier et l\'escalier de secours.'},
     mez:{t:'Mezzanine',h:'dans le volume du RDC',c:'',s:'115 – 293 m²',u:'Surface complémentaire',p:'Une surface en plus, accessible par escalier depuis le rez-de-chaussée, sans empiéter sur la hauteur des quais.'},
-    rdc:{t:'Rez-de-chaussée',h:'7,00 m',c:'3 t/m²',s:'524 – 578 m²',u:'Showroom, production, logistique',p:'Deux quais de déchargement avec élévateur par lot, quai à +1,20 m, accès poids lourds et dalle renforcée pour les engins de manutention.'},
-    ss:{t:'Sous-sol',h:'3,60 m',c:'',s:'',u:'',p:'Accès facile depuis la voie, desservi par l\'ascenseur, le monte-charge et l\'escalier.'}
+    rdc:{t:'Rez-de-chaussée',h:'7,00 m',c:'3,5 t/m²',s:'524 – 578 m²',u:'Showroom, production, logistique',p:'Un quai de déchargement avec élévateur par lot, à +1,20 m, accès poids lourds et dalle renforcée pour les engins de manutention.'},
+    ss:{t:'Sous-sol',h:'2,50 m',c:'',s:'',u:'',p:'Accès facile depuis la voie, desservi par l\'ascenseur, le monte-charge et l\'escalier.'}
   };
   function setLevel(k){
     var d=LV[k]; if(!d) return;
