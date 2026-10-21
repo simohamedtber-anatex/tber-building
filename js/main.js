@@ -137,6 +137,19 @@
   });
 
 
+  // Mesure d'audience : clics de contact (Google Analytics)
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a'); if(!a||typeof window.gtag!=='function') return;
+    var href=a.getAttribute('href')||'', ev=null, label=null;
+    if(href.indexOf('wa.me/')>-1){ev='contact_whatsapp';label=a.id==='waSend'?'formulaire':a.classList.contains('wa')?'bouton_flottant':'lien'}
+    else if(href.indexOf('mailto:')===0){ev='contact_email';label=a.id==='mailSend'?'formulaire':'lien'}
+    else if(href.indexOf('instagram.com')>-1){ev='reseau_social';label='instagram'}
+    else if(href.indexOf('facebook.com')>-1){ev='reseau_social';label='facebook'}
+    else if(href.indexOf('google.com/maps')>-1){ev='itineraire';label='google_maps'}
+    else if(a.closest('.lang')){ev='changement_langue';label=a.getAttribute('hreflang')}
+    if(ev) gtag('event',ev,{type:label,langue:document.documentElement.lang});
+  });
+
   // ===== Animations =====
   (function(){
     var root=document.documentElement, hdr=$('.hdr'), bar=$('#progress');
