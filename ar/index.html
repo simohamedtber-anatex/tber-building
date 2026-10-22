@@ -93,6 +93,32 @@
     </div>
   </div>
 
+  <!-- VIDÉO -->
+  <section class="sec alt" id="video">
+    <div class="wrap vid">
+      <div class="vid-text">
+        <span class="eyebrow">فيديو</span>
+        <h2>الموقع من السماء.</h2>
+        <p class="lead">من شبكة الطرق السيارة إلى الورش: اكتشف موقع المبنى ومداخله وتقدم الأشغال في دقيقة واحدة.</p>
+        <div class="vid-actions">
+          <button class="btn" type="button" id="vidFull">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+            المشاهدة بملء الشاشة
+          </button>
+        </div>
+      </div>
+      <figure class="vid-frame">
+        <video id="vid" muted loop playsinline preload="none" poster="../assets/video-poster.jpg" data-src="../assets/video-drone.mp4" aria-label="فيديو تقديمي لـ TBER BUILDING مصوّر بطائرة مسيّرة"></video>
+        <button class="vid-btn vid-play" type="button" id="vidPlay" aria-label="تشغيل" data-play="تشغيل" data-pause="إيقاف مؤقت">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        </button>
+        <button class="vid-btn vid-sound" type="button" id="vidSound" aria-pressed="false" data-on="تشغيل الصوت" data-off="كتم الصوت" aria-label="تشغيل الصوت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="none"/><path class="i-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="i-off" d="M16 9l5 6M21 9l-5 6"/></svg>
+        </button>
+      </figure>
+    </div>
+  </section>
+
   <!-- COUPE -->
   <section class="sec" id="hauteurs">
     <div class="wrap">
@@ -293,32 +319,6 @@
           <figcaption><b>الطوابق 1 و2 و3</b><span>3,60 m · 750 kg/m²</span></figcaption>
         </figure>
       </div>
-    </div>
-  </section>
-
-  <!-- VIDÉO -->
-  <section class="sec" id="video">
-    <div class="wrap vid">
-      <div class="vid-text">
-        <span class="eyebrow">فيديو</span>
-        <h2>الموقع من السماء.</h2>
-        <p class="lead">من شبكة الطرق السيارة إلى الورش: اكتشف موقع المبنى ومداخله وتقدم الأشغال في دقيقة واحدة.</p>
-        <div class="vid-actions">
-          <button class="btn" type="button" id="vidFull">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
-            المشاهدة بملء الشاشة
-          </button>
-        </div>
-      </div>
-      <figure class="vid-frame">
-        <video id="vid" muted loop playsinline preload="none" poster="../assets/video-poster.jpg" data-src="../assets/video-drone.mp4" aria-label="فيديو تقديمي لـ TBER BUILDING مصوّر بطائرة مسيّرة"></video>
-        <button class="vid-btn vid-play" type="button" id="vidPlay" aria-label="تشغيل" data-play="تشغيل" data-pause="إيقاف مؤقت">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
-        </button>
-        <button class="vid-btn vid-sound" type="button" id="vidSound" aria-pressed="false" data-on="تشغيل الصوت" data-off="كتم الصوت" aria-label="تشغيل الصوت">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="none"/><path class="i-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="i-off" d="M16 9l5 6M21 9l-5 6"/></svg>
-        </button>
-      </figure>
     </div>
   </section>
 
