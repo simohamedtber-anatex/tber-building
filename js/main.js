@@ -55,7 +55,7 @@
     }
     var tot=ids.reduce(function(a,id){return a+sum(id)},0);
     tweenTotal(tot);
-    $('#totK').textContent=ids.length===4?'surface utile des 4 lots':ids.length===1?'surface utile du lot '+ids[0]:'surface utile des lots '+ids.join(' + ');
+    $('#totK').textContent=ids.length===4?'surface à louer : 4 lots':ids.length===1?'surface à louer : lot '+ids[0]:'surface à louer : lots '+ids.join(' + ');
     $('#tHead').innerHTML='<tr><th>Niveau</th>'+ids.map(function(i){return '<th>Lot '+i+'</th>'}).join('')+(ids.length>1?'<th>Total</th>':'')+'</tr>';
     $('#tBody').innerHTML=ROWS.map(function(r){
       var t=0;var cells=ids.map(function(i){t+=LOTS[i][r[0]];return '<td>'+fmt(LOTS[i][r[0]])+'</td>'}).join('');

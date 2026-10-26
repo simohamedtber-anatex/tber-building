@@ -320,6 +320,8 @@ footer ul a{text-decoration:none}
 .vid-sound .i-on{display:none}
 .vid-sound[aria-pressed="true"] .i-on{display:inline}.vid-sound[aria-pressed="true"] .i-off{display:none}
 @media (max-width:860px){.vid{grid-template-columns:minmax(0,1fr)}.vid-frame{height:min(60vh,480px)}}
+.foot-rent{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.intro h1{max-width:18ch}
 /* Langues */
 @media (max-width:480px){.hdr .wrap{gap:10px}.brand{gap:8px}.brand svg{width:42px}.brand-name{font-size:15px;letter-spacing:.08em}.lang a{padding:6px 5px}}
 .lang{display:flex;gap:2px;font:500 12px var(--f-mono)}

@@ -55,7 +55,7 @@
     }
     var tot=ids.reduce(function(a,id){return a+sum(id)},0);
     tweenTotal(tot);
-    $('#totK').textContent=ids.length===4?'المساحة الصافية للوحدات الأربع':ids.length===1?'المساحة الصافية للوحدة '+ids[0]:'المساحة الصافية للوحدات '+ids.join(' + ');
+    $('#totK').textContent=ids.length===4?'المساحة المعروضة للكراء: الوحدات الأربع':ids.length===1?'المساحة المعروضة للكراء: الوحدة '+ids[0]:'المساحة المعروضة للكراء: الوحدات '+ids.join(' + ');
     $('#tHead').innerHTML='<tr><th>المستوى</th>'+ids.map(function(i){return '<th>الوحدة '+i+'</th>'}).join('')+(ids.length>1?'<th>المجموع</th>':'')+'</tr>';
     $('#tBody').innerHTML=ROWS.map(function(r){
       var t=0;var cells=ids.map(function(i){t+=LOTS[i][r[0]];return '<td>'+fmt(LOTS[i][r[0]])+'</td>'}).join('');

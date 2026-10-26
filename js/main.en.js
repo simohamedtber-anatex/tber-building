@@ -55,7 +55,7 @@
     }
     var tot=ids.reduce(function(a,id){return a+sum(id)},0);
     tweenTotal(tot);
-    $('#totK').textContent=ids.length===4?'net area of the 4 lots':ids.length===1?'net area of lot '+ids[0]:'net area of lots '+ids.join(' + ');
+    $('#totK').textContent=ids.length===4?'area for rent: 4 lots':ids.length===1?'area for rent: lot '+ids[0]:'area for rent: lots '+ids.join(' + ');
     $('#tHead').innerHTML='<tr><th>Level</th>'+ids.map(function(i){return '<th>Lot '+i+'</th>'}).join('')+(ids.length>1?'<th>Total</th>':'')+'</tr>';
     $('#tBody').innerHTML=ROWS.map(function(r){
       var t=0;var cells=ids.map(function(i){t+=LOTS[i][r[0]];return '<td>'+fmt(LOTS[i][r[0]])+'</td>'}).join('');
